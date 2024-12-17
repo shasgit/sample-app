@@ -6,6 +6,7 @@ import {
   GridSortModel,
   GridFilterModel,
   useGridApiRef,
+  GridColumnVisibilityModel,
 } from '@mui/x-data-grid-pro';
 import Export from './Export';
 
@@ -59,6 +60,9 @@ function applyFilter(rowData: any[], filterModel: any): any[] {
 export default function App() {
   const [sortModel, setSortModel] = React.useState<GridSortModel>([]);
   const [filterModel, setFilterModel] = React.useState<GridFilterModel>({ items: [] });
+  const [columnVisibilityModel, setColumnVisibilityModel] = React.useState<GridColumnVisibilityModel>({
+    lastName: false     // Hide the 'lastName' column
+  });
   const apiRef = useGridApiRef();
 
   const getDownloadData = (): [Array<Record<string, string>>, Array<Record<string, string>>] => {
@@ -132,6 +136,8 @@ export default function App() {
         onSortModelChange={setSortModel}
         filterModel={filterModel}
         onFilterModelChange={setFilterModel}
+        columnVisibilityModel={columnVisibilityModel}
+        onColumnVisibilityModelChange={setColumnVisibilityModel}
       />
     </div>
   );
